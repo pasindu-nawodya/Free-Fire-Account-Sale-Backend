@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const MemberDetails = require('../Models/teamMembersTable');
+const AccountDetails = require('../Models/accountSchema');
 
 //get all details
 router.get('/',async (req,res)=>{
 
     try{
-        const guildMem = await MemberDetails.find();
-        res.json(guildMem);
+        const acc = await AccountDetails.find();
+        res.json(acc);
     }catch(err){
         res.json({message:err})
     }
@@ -16,8 +16,8 @@ router.get('/',async (req,res)=>{
 //get specific item
 router.get('/:id',async (req,res)=>{
     try{
-        const specificMember = await MemberDetails.findById(req.params.id);
-        res.json(specificMember);
+        const specificAccount = await AccountDetails.findById(req.params.id);
+        res.json(specificAccount);
     }catch(err){
         res.json({message:err});
     }
@@ -25,19 +25,21 @@ router.get('/:id',async (req,res)=>{
 
 //submit details
 router.post('/',(req,res)=>{
-    const member = new MemberDetails({
-        playerid:req.body.playerid,
+    const account = new AccountDetails({
+        accountid:req.body.accountid,
         gamingalies:req.body.gamingalies,
         realname:req.body.realname,
         image:req.body.image,
-        contactdetails:req.body.contactdetails,
-        position:req.body.position,
+        desc:req.body.desc,
+        whatsapp:req.body.whatsapp,
+        email:req.body.email,
+        mobile:req.body.mobile,
 
     });
 
     member.save()
         .then(data=>{
-            res.json(member);
+            res.json(account);
         })
         .catch(err=>{
             res.json({message:err})
@@ -47,17 +49,19 @@ router.post('/',(req,res)=>{
 //update details
 router.post('/:id',async (req,res)=>{
     try{
-        const updateMember =await MemberDetails.updateOne({_id:req.params.id},
+        const updateAccount =await AccountDetails.updateOne({_id:req.params.id},
             {$set : {
-                playerid:req.body.playerid,
+                accountid:req.body.accountid,
                 gamingalies:req.body.gamingalies,
                 realname:req.body.realname,
                 image:req.body.image,
-                contactdetails:req.body.contactdetails,
-                position:req.body.position,
+                desc:req.body.desc,
+                whatsapp:req.body.whatsapp,
+                email:req.body.email,
+                mobile:req.body.mobile,
             }});
 
-        res.json(updateMember);
+        res.json(updateAccount);
 
 
     }catch(err){
@@ -68,8 +72,8 @@ router.post('/:id',async (req,res)=>{
 //delete details
 router.delete('/:id',async (req,res)=>{
     try{
-        const deleteMember =await MemberDetails.remove({_id: req.params.id});
-        res.json(deleteMember);
+        const deleteAccount =await AccountDetails.remove({_id: req.params.id});
+        res.json(deleteAccount);
     }catch(err){
         res.json({message:err});
     }
