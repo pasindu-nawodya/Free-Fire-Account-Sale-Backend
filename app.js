@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv/config');
 
 //import routes
-const memberRoute = require('./Routes/memberdetails');
+const accountRoute = require('./Routes/accountdetails');
 
 //port
 var PORT = process.env.PORT || 4000;
@@ -14,7 +14,7 @@ var PORT = process.env.PORT || 4000;
 //middleware
 app.use(bodyparser.json());
 app.use(cors());
-app.use('/member', memberRoute);
+app.use('/account', accountRoute);
 
 //get
 app.get('/',(req,res)=>{
