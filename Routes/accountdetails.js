@@ -29,6 +29,9 @@ router.post('/',(req,res)=>{
         accountid:req.body.accountid,
         gamingalies:req.body.gamingalies,
         realname:req.body.realname,
+        gamename:req.body.gamename,
+        price_t:req.body.price_t,
+        level:req.body.level,
         image:req.body.image,
         desc:req.body.desc,
         whatsapp:req.body.whatsapp,
@@ -37,7 +40,7 @@ router.post('/',(req,res)=>{
 
     });
 
-    member.save()
+    account.save()
         .then(data=>{
             res.json(account);
         })
@@ -54,6 +57,9 @@ router.post('/:id',async (req,res)=>{
                 accountid:req.body.accountid,
                 gamingalies:req.body.gamingalies,
                 realname:req.body.realname,
+                gamename:req.body.gamename,
+                price_t:req.body.price_t,
+                level:req.body.level,
                 image:req.body.image,
                 desc:req.body.desc,
                 whatsapp:req.body.whatsapp,
